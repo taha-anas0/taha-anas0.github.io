@@ -36,6 +36,80 @@ body {
     @apply w-dvw h-dvh overflow-hidden;
   }
 
+  .window-maximized,
+  .window-maximized[id] {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100dvw !important;
+    height: calc(100dvh - 80px) !important;
+    transform: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Resize handles */
+  .resize-handle {
+    position: absolute;
+    z-index: 10;
+  }
+
+  /* Edge handles */
+  .resize-top {
+    top: 0;
+    left: 10px;
+    right: 10px;
+    height: 6px;
+  }
+
+  .resize-bottom {
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    height: 6px;
+  }
+
+  .resize-left {
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 6px;
+  }
+
+  .resize-right {
+    right: 0;
+    top: 10px;
+    bottom: 10px;
+    width: 6px;
+  }
+
+  /* Corner handles */
+  .resize-top-left {
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+  }
+
+  .resize-top-right {
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+  }
+
+  .resize-bottom-left {
+    bottom: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+  }
+
+  .resize-bottom-right {
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+  }
+
   nav {
     @apply flex justify-between items-center bg-white/50 backdrop-blur-3xl p-2 px-5 select-none;
 
@@ -106,11 +180,11 @@ body {
     }
 
     .minimize {
-      @apply size-3.5 rounded-full bg-[#ffc030];
+      @apply size-3.5 rounded-full bg-[#ffc030] cursor-pointer;
     }
 
     .maximize {
-      @apply size-3.5 rounded-full bg-[#2acb42];
+      @apply size-3.5 rounded-full bg-[#2acb42] cursor-pointer;
     }
   }
 
@@ -163,53 +237,57 @@ body {
   }
 
   #terminal {
-    @apply w-xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-xl absolute top-32 left-1/12 bg-[#1e1e1e] shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     h2 {
       @apply font-bold text-sm text-center w-full;
     }
 
-    .techstack {
-      @apply text-sm font-roboto p-5;
+    .terminal-body {
+      @apply p-4 font-roboto text-sm h-80 overflow-y-auto cursor-text;
+      background-color: #1e1e1e;
+    }
 
-      .label {
-        @apply flex items-center ms-10 mt-7;
-      }
+    .terminal-line {
+      @apply mb-1;
+    }
 
-      .content {
-        @apply py-5 my-5 border-y border-dashed space-y-1;
+    .prompt-line {
+      @apply flex items-start gap-1 flex-wrap;
+    }
 
-        li {
-          .check {
-            @apply text-[#00A154] w-5;
-          }
+    .prompt {
+      @apply text-[#50fa7b] font-semibold;
+    }
 
-          h3 {
-            @apply font-semibold text-[#00A154] w-32 ms-5;
-          }
+    .prompt-symbol {
+      @apply text-[#8be9fd] mx-1;
+    }
 
-          ul {
-            @apply flex items-center gap-3;
-          }
-        }
-      }
+    .prompt-arrow {
+      @apply text-[#ff79c6] mr-2;
+    }
 
-      .footnote {
-        @apply text-[#00A154] space-y-1;
+    .command-text {
+      @apply text-white break-all min-w-0 flex-1;
+    }
 
-        p {
-          @apply flex items-center;
+    .output-text {
+      @apply text-gray-300 whitespace-pre-wrap font-roboto text-sm my-1 break-all;
+    }
 
-          svg {
-            @apply w-5 me-5;
-          }
-        }
-      }
+    .input-line {
+      @apply mt-2;
+    }
+
+    .terminal-input {
+      @apply bg-transparent border-none outline-none text-white flex-1 font-roboto text-sm caret-white resize-none overflow-hidden;
+      field-sizing: content;
     }
   }
 
   #contact {
-    @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-xl h-96 absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
 
     h2 {
       @apply font-bold text-sm text-center w-full;
